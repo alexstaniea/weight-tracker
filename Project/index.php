@@ -10,35 +10,27 @@ session_start();
 </head>
 <body>
 
-  <div class="jumbotron">
-    <h1 id="title">Bootstrap Tutorial</h1> 
-    <p id="subtitle">Sign in</p> 
-  </div>
+  <div class="login">
+    <h1>Sign in</h1> 
+      <?php
+              if(isset($_SESSION['id'])){
+                  header("Location: ./dashboard.php");
+              }
+      ?>
 
+      <form method="POST" action="includes/login.inc.php">
 
-<?php
-        if(!isset($_SESSION['id'])){
-            header("Location: ./dashboard.php");
-        }
-?>
-
-<form method="POST" action="includes/login.inc.php">
-    <div class="container">
-      <div class="form-group ">
-        <label for="exampleInputEmail1">Email address</label>
-        <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your informations with anyone else.</small>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-      </div>
-      <button type="submit" class="btn btn-primary">Sign in</button>
-    </div>
-</form>
-
-
-
+              <label for="exampleInputEmail1">Email address</label>
+              <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+              <small id="emailHelp" class="form-text text-muted">We'll never share your informations with anyone else.</small>
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">     
+              <button type="submit"  id="button1" class="btn btn-primary btn-block btn-large">Sign in</button>
+      
+      </form>
+      <a href="signup.php" id="link"><button id="button2" type="submit" class="btn btn-success btn-block btn-large">Sign up</button></a>
+ </div>
+ 
 <?php
       if(isset($_GET['info']) && $_GET['info']== 'wrong')
       {
