@@ -11,30 +11,27 @@ session_start();
 <body>
 
   <div class="login">
-    <h1>Sign in</h1> 
-      <?php
-              if(isset($_SESSION['id'])){
-                  header("Location: ./dashboard.php");
-              }
-      ?>
-
+  
+    <h1 style="margin-bottom:20%; margin-top:-7%;">Sign in</h1> 
       <form method="POST" action="includes/login.inc.php">
 
-              <label for="exampleInputEmail1">Email address</label>
-              <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-              <small id="emailHelp" class="form-text text-muted">We'll never share your informations with anyone else.</small>
-              <label for="exampleInputPassword1">Password</label>
+              <label for="exampleInputEmail1" style="color:lightgray;">Email address</label>
+              <input type="email" name="email" class="form-control" style="margin-bottom:10%" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+              <label for="exampleInputPassword1" style="color:lightgray">Password</label>
               <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">     
-              <button type="submit"  id="button1" class="btn btn-primary btn-block btn-large">Sign in</button>
+              <button type="submit"  id="button1" style="margin-top:9%" class="btn btn-success btn-block btn-large">Sign in</button>
       
       </form>
-      <a href="signup.php" id="link"><button id="button2" type="submit" class="btn btn-success btn-block btn-large">Sign up</button></a>
+      <a href="signup.php" id="link"><button id="button2" style="margin-top:9%"  type="submit" class="btn btn-primary btn-block btn-large">Sign up</button></a>
  </div>
  
 <?php
       if(isset($_GET['info']) && $_GET['info']== 'wrong')
       {
-        echo '<h1>Wrong username or password!</h1>';
+        echo '<h1 id="wrong">Wrong username or password!</h1>';
+      }else if(isset($_GET['info']) && $_GET['info']== 'missing')
+      {
+        echo '<h1 id="missing">Enter your username and password!</h1>';
       }
 ?>
 </body>

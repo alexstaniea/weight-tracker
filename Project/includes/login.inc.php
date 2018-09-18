@@ -31,9 +31,12 @@ if(isset($_POST['email']) && !empty($_POST['email']) && isset($_POST['password']
                 $_SESSION['id'] = $row['id'];
                 $_SESSION['email'] = $row['email'];
                 $_SESSION['password'] = $row['password'];
+                $_SESSION['username'] = $row['username'];
                 header("Location: ../dashboard.php");
             }
 
             
         }
+}else{
+    header("Location: ../index.php?info=missing");
 }
