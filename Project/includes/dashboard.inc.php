@@ -12,6 +12,5 @@ if(!empty($_POST['weight']) && isset($_POST['weight']))
     $result = mysqli_query($connect, $sql);
     header("Location: ../dashboard.php?info=ready");
 }else{
-
     header("Location: ../dashboard.php?info=error");
 }
