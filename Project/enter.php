@@ -3,12 +3,16 @@
 ?>
 
 <!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Sign in</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Enter an entry</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" type="text/css" href="style/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="style/enter.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -16,7 +20,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
-
 </head>
 <body>
 <div class="wrapper">
@@ -55,47 +58,28 @@
                     </li>
             </ul>
         </nav>
-
-
     <div class="container-fluid" id="content">
-
         <button type="button" id="sidebarCollapse" class="btn btn-info">
             <i class="fas fa-align-justify fa-3x"></i>
         </button>
 
-        <?php  
-            echo '<h2 id="text">Hello, '.$_SESSION['username'].'</h2>';
-        ?>
+        <h2>Enter a specific entry:</h2>
 
-       
-        <?php
-            require 'includes/connect.php';
+        <form method="POST" action="includes/enter.inc.php">
 
-            if(!isset($_GET['info'])){
-                echo'
-                <h3 id="text2">What is your weight today?</h3>
-                <form method="POST"  action="includes/dashboard.inc.php">
-                    <input id="thekg" name="weight" type="text" required>
-                    <select  id="selector">
-                        <option value="kg">kg</option>
-                        <option value="kg">lbs</option>
-                    </select>                    
-                    <button type="submit" class="btn btn-primary  lol" style=" font-size:20px;">Enter</button>
-                </form>
+            <p>The weight:</p>
+            <input name="weight" type="text" required>
+            <select  id="selector">
+                <option value="kg">kg</option>
+                <option value="kg">lbs</option>
+            </select>
 
-                <form  action="includes/logout.inc.php">
-                    <button class="btn btn-danger" style="margin-top:-50.47%; font-size:15px;  margin-left:91.2%;">Log out</button>
-                </form>';
-            }else if(isset($_GET['info'])=='ready')
-            {
-                echo '
-                <form  action="includes/logout.inc.php">
-                    <button class="btn btn-danger" style="position:absolute; font-size:15px; margin-top:-14.6%; margin-left:89.25%;">Log out</button>
-                </form>
-                <div class=container> <canvas style="margin-top:2%;" id="myChart"></canvas> </div>';
-            }
-       
-        ?>
+            <p>The date:</p>   
+            <input name="date" type="text" required> 
+            <p>The date <strong>must</strong> be in the following format: (yyyy-mm-dd)!</p>
+
+            <button type="submit" class="btn btn-primary" style=" font-size:20px;">Enter</button>
+        </form>
     </div>
 </div>
 
@@ -123,97 +107,5 @@
         });
     });
 </script>
-
-<script>
-    var myChart = document.getElementById('myChart').getContext('2d');
-
-    Chart.defaults.global.defaultFontFamily = 'Lato';
-    Chart.defaults.global.defaultFontSize = 16;
-    Chart.defaults.global.defaultFontColor = '#777';
-
-
-    var weightchart = new Chart(myChart,{
-        type:'line',
-        data:{
-            labels:[
-            
-            <?php
-                    require 'includes/connect.php';
-
-                    if(isset($_GET['info'])=='ready')
-                    {
-                        $id = $_SESSION['id'];
-
-                        $sql = "SELECT weight,value FROM dates WHERE userid='$id' ORDER BY value";
-                        $result = mysqli_query($connect, $sql);
-
-                        while($row = $result->fetch_array()) {
-                            echo "'".$row['value']."', "; 
-                        }
-                    }
-                ?>
-
-            ],
-            datasets:[{
-                label:'weight',
-                data:[
-                <?php
-                    require 'includes/connect.php';
-
-                    if(isset($_GET['info'])=='ready')
-                    {
-                        $id = $_SESSION['id'];
-
-                        $sql = "SELECT weight,value FROM dates WHERE userid='$id' ORDER BY value";
-                        $result = mysqli_query($connect, $sql);
-
-                        while($row = $result->fetch_array()) {
-                            echo $row['weight'].','; 
-                        }
-                    }
-                ?>
-            ],
-            backgroundColor:[
-                <?php
-                    require 'includes/connect.php';
-
-                    if(isset($_GET['info'])=='ready')
-                    {
-                        $id = $_SESSION['id'];
-
-                        $sql = "SELECT weight,value FROM dates WHERE userid='$id'";
-                        $result = mysqli_query($connect, $sql);
-
-                        while($row = $result->fetch_array()) {
-                            echo "'rgba(21, 213, 139, 0.52)',"; 
-                        }
-                    }
-                ?>
-
-            ],
-            borderWidth:1,
-            borderColor:'#777',
-            hoverBorderWidth:3,
-            hoverBorderColor:'#000'
-          }]
-        },
-        options:{
-            title:{
-                display:true,
-                text:'Your weight progress',
-                fontSize:25
-            },
-            legend:{
-                position:'right',
-                labels:{
-                    fontColor:'#000'
-                }
-                
-            }
-        }
-    });
-
-</script>
-
 </body>
 </html>
