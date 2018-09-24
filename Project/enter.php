@@ -62,23 +62,27 @@
         <button type="button" id="sidebarCollapse" class="btn btn-info">
             <i class="fas fa-align-justify fa-3x"></i>
         </button>
+        <div id="elements">
+            <h2 id="title">Enter a specific entry:</h2>
 
-        <h2>Enter a specific entry:</h2>
+            <form method="POST" action="includes/enter.inc.php">
 
-        <form method="POST" action="includes/enter.inc.php">
+                <p><strong> The weight:</strong></p>
+                <input name="weight" type="text" required>
+                <select  id="selector">
+                    <option value="kg">kg</option>
+                    <option value="kg">lbs</option>
+                </select>
 
-            <p>The weight:</p>
-            <input name="weight" type="text" required>
-            <select  id="selector">
-                <option value="kg">kg</option>
-                <option value="kg">lbs</option>
-            </select>
+                <p><strong>The date:</strong></p>   
+                <input id="inputdate" name="date" type="text" required> 
+                <p id="subtitle">The date <strong>must</strong> be in the following format: (yyyy-mm-dd)!</p>
 
-            <p>The date:</p>   
-            <input name="date" type="text" required> 
-            <p>The date <strong>must</strong> be in the following format: (yyyy-mm-dd)!</p>
-
-            <button type="submit" class="btn btn-primary" style=" font-size:20px;">Enter</button>
+                <button type="submit" class="btn btn-primary" id="enterbutton">Enter</button>
+            </form>
+        </div>
+        <form  action="includes/logout.inc.php">
+            <button class="btn btn-danger" style="margin-top:-72.3%; font-size:15px;  margin-left:91.2%;">Log out</button>  
         </form>
     </div>
 </div>

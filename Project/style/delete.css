@@ -2,7 +2,8 @@
 body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
-    margin:0px auto;
+    margin:auto;
+    text-align:center;
 }
 
 p {
@@ -10,7 +11,7 @@ p {
     font-size: 2.1em;
     font-weight: 300;
     line-height: 1.7em;
-    color: #999;
+    color: black;
 }
 
 a,
@@ -199,4 +200,34 @@ a.article:hover {
 
 #row{
     display:inline-block;
+}
+
+#deletediv{
+    text-align:center;
+    margin-bottom:1%;
+    font-size:15px;
+}
+
+#deletep{
+    display:inline;
+}
+
+#deleteform{
+    display:inline; 
+}
+
+#deletebutton{
+    font-size:20px;
+    margin-top:-0.5%;
+    margin-left:2%;
+}
+
+#title{
+    font-size:45px;
+    margin-bottom:6%;
+    text-align:center;
+}
+
+#content{
+    background-image:url("../img/dust_scratches.png");
 }

@@ -10,8 +10,9 @@ session_start();
 </head>
 <body>
 
+<h1 id="title">Weight tracker</h1>
+
   <div class="login">
-  
     <h1 style="margin-bottom:20%; margin-top:-7%;">Sign in</h1> 
       <form method="POST" action="includes/login.inc.php">
 

@@ -59,10 +59,12 @@
             </ul>
         </nav>
     <div class="container-fluid" id="content">
+        
         <button type="button" id="sidebarCollapse" class="btn btn-info">
             <i class="fas fa-align-justify fa-3x"></i>
         </button>
 
+        <h2 id="title">Delete an entry</h2>
         <?php
             require 'includes/connect.php';
 
@@ -73,15 +75,18 @@
 
             while($row = $result->fetch_array()) {
 
-                echo '<div><p>'. $row['value']." - ".$row['weight']." kg</p>".'
-                <form method="POST" action="includes/delete.inc.php">
-                    <button style="display:block" class="btn btn-danger">Delete entry</button> 
+                echo '<div id="deletediv"><p id="deletep">On <strong>'. $row['value']."</strong> your weight was <strong>".$row['weight']."</strong> kg.</p>".'
+                <form method="POST" action="includes/delete.inc.php" id="deleteform">
+                    <button class="btn btn-danger" id="deletebutton">Delete entry</button>
                     <input name="delete" value='.$row['id'].' type=hidden>
                 </form> </div>     
                 '; 
             }
         ?>        
 
+        <form  action="includes/logout.inc.php">
+            <button class="btn btn-danger" style="margin-top:-100%; font-size:15px;  margin-left:91.2%;">Log out</button>  
+        </form>
 
     </div>
 </div>
